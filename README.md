@@ -5,6 +5,13 @@
 ## Project Description
 Your project description here.
 
+## Setup
+
+Create a conda environment using the ```environment.yml file```
+```
+conda env create -f environment.yml
+```
+
 ## Files and data description
 Overview of the files and data present in the root directory. 
 
