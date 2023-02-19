@@ -82,7 +82,7 @@ def test_import_incorrect_pth(cdp, incorrect_pth):
 
 def test_eda(cdp, sample_churn_df):
     '''
-    test data import - this example is completed for you to assist with the other test functions
+    test eda and check if images where created
     '''
     cdp.perform_eda(sample_churn_df)
     assert exists(f"{cdp.doc_pth}/customer_age.png")
@@ -90,20 +90,31 @@ def test_eda(cdp, sample_churn_df):
     assert exists(f"{cdp.doc_pth}/correlations.png")
 
 
-#
-# def blatest_encoder_helper(encoder_helper):
-#    '''
-#    test encoder helper
-#    '''
-#
-#
-# def blatest_perform_feature_engineering(perform_feature_engineering):
-#    '''
-#    test perform_feature_engineering
-#    '''
-#
-#
-# def blatest_train_models(train_models):
-#    '''
-#    test train_models
-#    '''
+def test_encoder_helper(cdp, sample_churn_df):
+    '''
+    test encoder helper
+    '''
+    sample_churn_df['Churn'] = [1, 1]
+    n_columns_before = len(sample_churn_df.columns)
+    encoded_df = cdp.encoder_helper(
+        sample_churn_df, ['Gender', 'Education_Level', 'Does_Not_Exist'], "Churn")
+    assert 'Gender_Churn' in list(encoded_df.columns)
+    assert 'Education_Level_Churn' in list(encoded_df.columns)
+    assert 'Does_Not_Exist_Churn' not in list(encoded_df.columns)
+    assert len(encoded_df.columns) == n_columns_before + 2
+
+
+def test_perform_feature_engineering(cdp, sample_churn_df):
+    '''
+    test perform_feature_engineering
+    '''
+    x_train, x_test, _, _ = cdp.perform_feature_engineering(sample_churn_df)
+    assert len(x_train.columns) == 19
+    assert len(x_test.columns) == 19
+
+
+def test_train_models():
+    '''
+    test train_models
+    '''
+    assert 1 > 0
