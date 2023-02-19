@@ -6,6 +6,7 @@ from os.path import exists
 import pytest
 import pandas as pd
 from churn.churn_data_prep import ChurnDataPreparation
+from churn.churn_modelling import ChurnModelling
 
 
 @pytest.fixture(name="cdp")
@@ -15,6 +16,14 @@ def cdp_fix(tmp_path):
     Input tmp_path: pytest buildin temp path
     '''
     return ChurnDataPreparation(tmp_path, tmp_path)
+
+@pytest.fixture(name="cmod")
+def cmod_fix(tmp_path):
+    '''
+    Churn Data Processing object to be used in the tests.
+    Input tmp_path: pytest buildin temp path
+    '''
+    return ChurnModelling(tmp_path, tmp_path, tmp_path)
 
 
 @pytest.fixture(name="correct_pth")
@@ -113,8 +122,19 @@ def test_perform_feature_engineering(cdp, sample_churn_df):
     assert len(x_test.columns) == 19
 
 
-def test_train_models():
+def test_train_models(cdp, cmod, correct_pth):
     '''
-    test train_models
+    test train_models and check if expected artifacts exist
     '''
-    assert 1 > 0
+    #take first 200 rows, to make the test running faster (we are not interested in a good model)
+    churn_df = cdp.import_data(correct_pth).iloc[:200,:]
+    x_train, x_test, y_train, y_test = cdp.perform_feature_engineering(churn_df)
+    cmod.train_models(x_train, x_test, y_train, y_test)
+    assert exists(f"{cmod.doc_pth}/feature_importance.png")
+    assert exists(f"{cmod.doc_pth}/lr_test_classification_report.png")
+    assert exists(f"{cmod.doc_pth}/lr_train_classification_report.png")
+    assert exists(f"{cmod.doc_pth}/rf_test_classification_report.png")
+    assert exists(f"{cmod.doc_pth}/rf_train_classification_report.png")
+    assert exists(f"{cmod.doc_pth}/roc_curve.png")
+    assert exists(f"{cmod.model_pth}/logistic_model.pkl")
+    assert exists(f"{cmod.model_pth}/rfc_model.pkl")
