@@ -1,5 +1,8 @@
 '''
 Module for retrieving, cleaning and preprocessing the data used for predict customer churn.
+
+Author: alu82
+Date: February 2023
 '''
 
 import logging
