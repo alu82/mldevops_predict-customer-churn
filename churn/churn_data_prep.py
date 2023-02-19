@@ -51,14 +51,17 @@ class ChurnDataPreparation:
         plt.figure(figsize=(20, 10))
         churn_df['Customer_Age'].hist()
         plt.savefig(f"{self.doc_pth}/customer_age.png")
+        self.logger.info("Histogram for customer created in %s.", self.doc_pth)
 
         plt.figure(figsize=(20, 10))
         sns.histplot(churn_df['Total_Trans_Ct'], stat='density', kde=True)
         plt.savefig(f"{self.doc_pth}/transaction_count.png")
+        self.logger.info("Histogram for Total_Trans_Ct created in %s.", self.doc_pth)
 
         plt.figure(figsize=(20, 10))
         sns.heatmap(churn_df.corr(), annot=False, cmap='Dark2_r', linewidths=2)
         plt.savefig(f"{self.doc_pth}/correlations.png")
+        self.logger.info("Correlation matrix created in %s.", self.doc_pth)
 
 
 #
