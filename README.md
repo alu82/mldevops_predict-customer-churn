@@ -20,10 +20,14 @@ I recommend using VS Code and the Python extensions.
 
 ## Files and data description
 ### Files
-- churn_notebook.ipynb: Original notebook provided by Udacity
 - churn_pipeline.py: Runnable pipeline that performes data transformation and modelling
 - environment.yml: Environment file (see above)
+
+### Udacity files (not needed for the module itself)
+- churn_notebook.ipynb: Original notebook provided by Udacity
 - Guide.ipynb: Original Guide provided by Udacity
+- churn_library.py: wrapper around the churn module that delegates the calles to the module
+- churn_script_logging_and_tests.py: an integration test (similar to the pipeline) with logging exercise
 
 ### Folders
 - churn: Contains the main module where all the logic is encapsulated (into several classes). Tests can also be found here.
@@ -35,18 +39,22 @@ I recommend using VS Code and the Python extensions.
 ## Running Files
 The pipeline and all related steps (data transformation, model training and evaluation) can be started by
 - activating the conda environment ```conda activate predict-customer-churn```
-- and by executing the script ```churn_pipeline.py```
+- and by executing the script ```churn_pipeline.py``` (alternativley ```churn_script_logging_and_tests.py```)
+
+Alternatively it can be executed by running the script 
 
 ## Checking files and code quality
 Navigate to the root folder of the project
 ```
 pylint ./churn
 pylint pylint churn_pipeline.py
+pylint churn_script_logging_and_tests.py
+pylint churn_library.py
 ```
-Both are currently >9.
+Every file is currently >9.
 
 ## Executing test
-Navigate to the root folder of the project
+Navigate to the root folder of the project to execute the unit tests
 ```
 pytest
 ```
