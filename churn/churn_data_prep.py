@@ -58,6 +58,11 @@ class ChurnDataPreparation:
         self.logger.info("Histogram for customer created in %s.", self.doc_pth)
 
         plt.figure(figsize=(20, 10))
+        churn_df['Marital_Status'].value_counts('normalize').plot(kind='bar')
+        plt.savefig(f"{self.doc_pth}/marital_status_normalized.png")
+        self.logger.info("Marital Status plot created in %s.", self.doc_pth)
+
+        plt.figure(figsize=(20, 10))
         sns.histplot(churn_df['Total_Trans_Ct'], stat='density', kde=True)
         plt.savefig(f"{self.doc_pth}/transaction_count.png")
         self.logger.info(

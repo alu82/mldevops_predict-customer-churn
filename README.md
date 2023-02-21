@@ -1,9 +1,11 @@
 # Predict Customer Churn
 
-- Project **Predict Customer Churn** of ML DevOps Engineer Nanodegree Udacity
+- Project **Predict Customer Churn** of ML DevOps Engineer Nanodegree Udacity. This is the project at the end of the first module **Clean Code Principles**. Some important concepts like modularization, testing, logging, linting (static code quality) are trained and applied.
 
 ## Project Description
-Your project description here.
+This project tries to predict the the customer for a bank based on historical data. If a customer is about to churn the bank might take some actions to prevent this to happen. 
+
+To make predictions a RandomForrest and a LogisticRegression Model is trained and saved for later inferencing (inferencing steps are not included in the project). Some models are already pushed to the repo (check out models folder). You can retrain them by executing the pipeline (see below how).
 
 ## Setup
 
@@ -39,9 +41,9 @@ I recommend using VS Code and the Python extensions.
 ## Running Files
 The pipeline and all related steps (data transformation, model training and evaluation) can be started by
 - activating the conda environment ```conda activate predict-customer-churn```
-- and by executing the script ```churn_pipeline.py``` (alternativley ```churn_script_logging_and_tests.py```)
+- moving to the project root folder
+- and by executing the script ```python churn_pipeline.py``` (alternativley ```python churn_script_logging_and_tests.py```)
 
-Alternatively it can be executed by running the script 
 
 ## Checking files and code quality
 Navigate to the root folder of the project
